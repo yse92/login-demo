@@ -1,44 +1,29 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {styles} from '../styles/TopBar.styles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { NavigationContext } from '@react-navigation/native';
 
-const TopBar = ({prevButtonText, submitButtonText}) => {
+const TopBar = ({leftButtonText, rightButtonText, onChange}) => {
+  const navigation = React.useContext(NavigationContext);
+  const handler = () => onChange()
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.prevButton}>
-        <MaterialIcons name="Done" size={30} color="#900" />
-        <Text>{prevButtonText}</Text>
+      <TouchableOpacity
+        style={styles.leftButton}
+        onPress={() => navigation.goBack()}>
+        <MaterialIcons name="chevron-left" size={30} color="#fff" />
+        <Text style={styles.leftButtonText}>{leftButtonText}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.nextButton}>
-        <Text>{submitButtonText}</Text>
-      </TouchableOpacity>
+      {rightButtonText && (
+        <TouchableOpacity style={styles.rightButton} onPress={handler}>
+          <MaterialIcons name="done" size={20} color="#6699ff" />
+          <Text style={styles.rightButtonText}>{rightButtonText}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'space-around',
-  },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  prevButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '20%',
-    backgroundColor: 'red',
-    height: 30,
-  },
-  nextButton: {
-    flexDirection: 'row',
-    width: '20%',
-    backgroundColor: 'w',
-    height: 30,
-    alignItems: 'center',
-  },
-});
-
-export default TopBar
+export default TopBar;

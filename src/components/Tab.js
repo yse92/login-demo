@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    padding: 10,
   },
 });
 

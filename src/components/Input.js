@@ -1,80 +1,97 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useCallback, useRef} from 'react';
+import {styles} from '../styles/Input.style';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   View,
   TextInput,
   Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
+import DatePicker from 'react-native-date-picker';
 
-const Input = ({
-  onChange,
-  value,
-  error,
-  labelText,
-  secureTextEntry,
-  iconURL,
-  editable,
-}) => {
+/**
+ * @param onChange
+ * @param onPress
+ * @param value
+ * @param error
+ * @param labelText
+ * @param secureTextEntry
+ * @param type
+ * @param editable
+ */
+
+const Input = props => {
   const handleChange = e => {
-    onChange(e);
+    props.onChange(e);
   };
+  const [editable, setEditable] = useState(true);
+  const [secured, setSecured] = useState(props.secureTextEntry);
+  const [open, setOpen] = useState(false)
 
-  const [secured, setSecured] = useState(false);
-
-  useEffect(() => {
-    setSecured(secureTextEntry);
-  }, []);
+  const dateHandler = (date) => {
+    props.onChangeDate(date)
+  }
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.label}>{labelText}</Text>
+      <Text style={styles.label}>{props.labelText}</Text>
       <View style={styles.container}>
-        <TextInput
+        {props.type !== 'date' && <TextInput
           onChangeText={handleChange}
-          value={value}
+          value={props.value}
           secureTextEntry={secured}
           editable={editable}
           style={styles.input}
-        />
-        {iconURL && secureTextEntry && (
+        />}
+        {props.type === 'visible' && props.secureTextEntry && (
           <TouchableOpacity
             onPressIn={() => setSecured(false)}
             onPressOut={() => setSecured(true)}>
-            <Image source={iconURL} style={styles.icon} />
+            <MaterialIcons name="visibility" size={25} color="grey" />
+          </TouchableOpacity>
+        )}
+        {props.type === 'locked' && !editable && (
+          <TouchableOpacity onPress={() => {setEditable(!editable)}}>
+              <MaterialIcons name="lock" size={20} color="grey" />
+          </TouchableOpacity>
+        )}
+        {props.type === 'locked' && editable && (
+          <TouchableOpacity onPress={() => {setEditable(!editable)}}>
+            <MaterialIcons name="lock-open" size={20} color="grey" />
+          </TouchableOpacity>
+        )}
+        {props.type === 'date' && (
+          <TouchableOpacity onPress={() => setOpen(true)}>
+            <TextInput
+              value={props.value.toLocaleString('en', {
+                year: "numeric",
+                month: "short",
+                day: "2-digit"}
+                )}
+              secureTextEntry={false}
+              editable={false}
+              style={styles.dateInput}
+            />
+            <DatePicker
+              modal
+              open={open}
+              mode="date"
+              date={props.value}
+              onConfirm={(date) => {
+                setOpen(false)
+                dateHandler(date)
+              }}
+              onCancel={() => {
+                setOpen(false)
+              }}
+            />
           </TouchableOpacity>
         )}
       </View>
-      {error && <Text>{error}</Text>}
+      {props.error && <Text style={styles.errorText}>{props.error}</Text>}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: 'column',
-    width: '90%',
-    alignItems: 'flex-start',
-    height: 60,
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-  },
-  icon: {
-    width: 25,
-    height: 25,
-  },
-  input: {
-    fontSize: 24,
-    width: '90%',
-  },
-  container: {
-    flexDirection: 'row',
-    width: '100%',
-  },
-  label: {
-    marginBottom: 5,
-  },
-});
 
 export default Input;
