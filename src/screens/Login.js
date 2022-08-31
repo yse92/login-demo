@@ -17,26 +17,23 @@ const Login = observer(({navigation}) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const firstMount = useRef(true)
+  const [checked, setChecked] = useState(false)
+  const mounted = useRef(true)
 
-
-  // useEffect(() => {
-  //   if (firstMount.current === false) {
-  //     if (emailError.length !== 0) {
-  //       setEmailError('');
-  //     }
-  //     if (passwordError.length !== 0) {
-  //       setPasswordError('');
-  //     }
-  //   }
-  // }, [login, password]);
+  useEffect(() =>{
+    console.log('eemailError: ', emailError, 'passwordError: ', passwordError)
+    console.log('mounted.current: ', mounted.current)
+    if (emailError.length === 0 && passwordError.length === 0 && !mounted.current) {
+      navigation.navigate('Profile');
+      setChecked(false);
+    }
+  }, [checked])
 
   const handleSubmit = () => {
-    setEmailError(() => isEmailValid(login))
-    setPasswordError(() =>isPasswordValid(password))
-    if (emailError.length === 0 && passwordError.length === 0 && firstMount.current === false) {
-      navigation.navigate('Profile');
-    }
+    setEmailError(isEmailValid(login))
+    setPasswordError(isPasswordValid(password))
+    mounted.current = false
+    setChecked(!checked)
   };
 
   return (
@@ -46,7 +43,6 @@ const Login = observer(({navigation}) => {
           value={login}
           labelText="Mobile Number/Email"
           onChange={e => setLogin(e)}
-          type='default'
           error={emailError}
         />
         <Input
