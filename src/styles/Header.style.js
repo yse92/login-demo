@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
     width: '10%',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    top: -35,
-    left: 40,
+    top: -30,
+    left: 30,
   },
   images: {
     width: 90,

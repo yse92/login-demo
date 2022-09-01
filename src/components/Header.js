@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {styles} from '../styles/Header.style'
-
+import {findUri} from '../utils/findUri';
+const _ = require('lodash')
 const ImagePicker = require('react-native-image-picker');
 
-const Header = ({title, descriptionText}) => {
-  const [fileUri, setFileUri] = useState();
+const Header = ({title, descriptionText, onPress, uri}) => {
 
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary(
@@ -18,7 +18,10 @@ const Header = ({title, descriptionText}) => {
       },
       response => {
         if (response.assets) {
-          setFileUri(response.assets[0].uri);
+          const uri = findUri(response)
+          if (uri) {
+            onPress(uri)
+          }
         }
       },
     );
@@ -27,7 +30,7 @@ const Header = ({title, descriptionText}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {fileUri && <Image source={{uri: fileUri}} style={styles.images} />}
+        {uri && <Image source={{uri: uri}} style={styles.images} />}
       </View>
       <View style={styles.titleHeader}>
         <Text style={styles.titleText}>{title}</Text>
