@@ -2,15 +2,21 @@ import {TextInput, TouchableOpacity} from 'react-native';
 import {styles} from '../styles/Input.style';
 import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
-const DateInput = ({onChangeDate, value}) => {
+const DateInput = ({onChangeDate, value, editable}) => {
   const [open, setOpen] = useState(false)
-  const options = {year: "numeric", month: "short", day: "2-digit"}
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "2-digit"
+  }
   const handleDate = (date) => {
     onChangeDate(date)
   }
   return (
-      <TouchableOpacity onPress={() => setOpen(true)}>
+    <>
+      <Pressable onPress={() => setOpen(true)} disabled={!editable}>
         <TextInput
           value={value.toLocaleString('en', options)}
           secureTextEntry={false}
@@ -30,7 +36,8 @@ const DateInput = ({onChangeDate, value}) => {
             setOpen(false)
           }}
         />
-      </TouchableOpacity>
+      </Pressable>
+    </>
     )
 }
 export default DateInput

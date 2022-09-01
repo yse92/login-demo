@@ -14,16 +14,17 @@ export const styles = StyleSheet.create({
     height: 25,
   },
   input: {
-    fontSize: 16,
+    fontSize: 20,
     width: '90%',
     marginBottom: 10,
   },
   dateInput: {
-    fontSize: 16,
+    fontSize: 20,
     marginBottom: 10,
   },
   container: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     width: '100%',
     borderBottomWidth: 1,
     borderBottomColor: 'lightgrey',

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StatusBar, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 const Wrapper = ({children, url}) => {
   return (

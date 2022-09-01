@@ -2,14 +2,14 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Wrapper from '../components/Wrapper';
 import Tab from '../components/Tab';
 import Input from '../components/Input';
-import Submit from '../components/Submit';
+import LogInButton from '../components/LogInButton';
 import {ICONS} from '../components/icons';
-import {validate} from '../utils/validate';
 import {observer} from 'mobx-react';
 import store from '../store/store';
 import {isEmailValid} from '../utils/isEmailValid';
 import {isPasswordValid} from '../utils/isPasswordValid';
-import {isMobileValid} from '../utils/isMobileValid';
+import {WelcomeBar} from '../components/WelcomeBar';
+import {BottomBar} from '../components/BottomBar';
 
 const Login = observer(({navigation}) => {
   const [login, setLogin] = useState('');
@@ -17,32 +17,35 @@ const Login = observer(({navigation}) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const [checked, setChecked] = useState(false)
-  const mounted = useRef(true)
+  const handleEmail = e => {
+    setLogin(e)
+    setEmailError('')
+  }
 
-  useEffect(() =>{
-    console.log('eemailError: ', emailError, 'passwordError: ', passwordError)
-    console.log('mounted.current: ', mounted.current)
-    if (emailError.length === 0 && passwordError.length === 0 && !mounted.current) {
-      navigation.navigate('Profile');
-      setChecked(false);
+  const handlePassword = e => {
+    setPassword(e)
+    setPasswordError('')
+  }
+
+  const handleLogIn = useCallback(() => {
+    const checkEmail = isEmailValid(login)
+    const checkPassword = isPasswordValid(password)
+    if (checkEmail.length === 0 && checkPassword.length === 0) {
+      navigation.navigate('Profile', {logged: store.users[0]});
+    } else {
+      setEmailError(checkEmail)
+      setPasswordError(checkPassword)
     }
-  }, [checked])
-
-  const handleSubmit = () => {
-    setEmailError(isEmailValid(login))
-    setPasswordError(isPasswordValid(password))
-    mounted.current = false
-    setChecked(!checked)
-  };
+  }, [login, password])
 
   return (
     <Wrapper url={ICONS['main']}>
       <Tab height="70%">
+        <WelcomeBar title="Hi Student" description="Sign in to continue" />
         <Input
           value={login}
           labelText="Mobile Number/Email"
-          onChange={e => setLogin(e)}
+          onChange={handleEmail}
           error={emailError}
         />
         <Input
@@ -50,14 +53,15 @@ const Login = observer(({navigation}) => {
           secureTextEntry={true}
           labelText="Password"
           type='visible'
-          onChange={e => setPassword(e)}
+          onChange={handlePassword}
           error={passwordError}
         />
-        <Submit
+        <LogInButton
           iconURL={ICONS['arrow']}
           title="SIGN IN"
-          onChange={handleSubmit}
+          onPress={handleLogIn}
         />
+        <BottomBar text="Forgot Password?"/>
       </Tab>
     </Wrapper>
   );

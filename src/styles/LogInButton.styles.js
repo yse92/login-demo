@@ -15,8 +15,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   icon: {
-    position: 'absolute',
-    left: 250,
+    justifyContent: 'center',
     width: 25,
     height: 20,
   },

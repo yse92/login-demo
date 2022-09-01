@@ -1,13 +1,12 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from '../styles/Submit.styles';
+import {styles} from '../styles/LogInButton.styles';
 
-const Submit = ({iconURL, title, onChange}) => {
+const LogInButton = ({iconURL, title, onPress}) => {
   const handleChange = e => {
-    onChange(e);
+    onPress(e);
   };
-
   return (
     <TouchableOpacity
       style={styles.button}
@@ -24,4 +23,4 @@ const Submit = ({iconURL, title, onChange}) => {
   );
 };
 
-export default Submit;
+export default LogInButton;

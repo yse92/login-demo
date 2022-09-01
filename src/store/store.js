@@ -20,7 +20,7 @@ class Store {
       motherName: 'Monica Larson',
       fatherName: 'Bernard Taylor',
       parmanentAdd: 'Karol Bagh, Delhi',
-      uri: '',
+      uri: 'file:///Users/ivan/Library/Developer/CoreSimulator/Devices/A779F931-E2BE-416C-99B6-CD4F64448A5D/data/Containers/Data/Application/19CFDCC3-1DDC-4FFA-A7B7-949677CB4401/tmp/CEA6E849-FD2E-41EF-B345-41CAC880F8D4.jpg',
       extraInfo: {
         'Class no': 'XI-B',
         'Roll no': '04',
