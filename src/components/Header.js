@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {styles} from '../styles/Header.style'
 import {findUri} from '../utils/findUri';
-const _ = require('lodash')
 const ImagePicker = require('react-native-image-picker');
 
 const Header = ({title, descriptionText, onPress, uri}) => {

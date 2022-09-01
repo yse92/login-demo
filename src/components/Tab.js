@@ -1,7 +1,11 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+
+
 const Tab = ({children, height}) => {
-  return <View style={[styles.container, {height: height}]}>{children}</View>;
+  return(
+    <View style={[styles.container, {height: height}]}>{children}</View>
+  )
 };
 
 const styles = StyleSheet.create({
@@ -14,6 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     padding: 15,
+
   },
 });
 

@@ -17,7 +17,7 @@ const LogInButton = ({iconURL, title, onPress}) => {
         colors={['#345FB4', '#95adde']}
         style={styles.gradient}>
         <Text style={styles.text}>{title}</Text>
-        <Image source={iconURL} style={styles.icon} />
+        <Image source={iconURL} style={styles.icon} width={20}/>
       </LinearGradient>
     </TouchableOpacity>
   );

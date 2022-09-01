@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
   },
   icon: {
     justifyContent: 'center',
-    width: 25,
-    height: 20,
+    width: 20,
+    height: 15,
   },
   gradient: {
     width: '80%',

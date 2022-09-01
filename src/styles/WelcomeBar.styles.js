@@ -11,10 +11,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     textAlign: 'left',
+    width: '100%',
   },
   description: {
     fontSize: 16,
     color: 'grey',
     textAlign: 'left',
+    width: '100%',
   }
 })

@@ -14,7 +14,9 @@ export const BottomBar = ({text}) => {
 const styles = StyleSheet.create({
   container: {
     width: '80%',
-    bottom: 20
+    position: 'relative',
+    marginTop: -20
+
   },
   text: {
     textAlign: 'right'
