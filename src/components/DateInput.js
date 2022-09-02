@@ -1,4 +1,4 @@
-import {TextInput, TouchableOpacity} from 'react-native';
+import {TextInput} from 'react-native';
 import {styles} from '../styles/Input.style';
 import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';

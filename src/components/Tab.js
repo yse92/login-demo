@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
-
+import {View} from 'react-native';
+import {styles} from '../styles/Tab.styles';
 
 const Tab = ({children, height}) => {
   return(
@@ -8,18 +8,5 @@ const Tab = ({children, height}) => {
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    width: '100%',
-    flexDirection: 'column',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    padding: 15,
-
-  },
-});
 
 export default Tab;

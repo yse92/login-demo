@@ -1,5 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
+const deviceHeight = Dimensions.get('window').height;
 export const styles = StyleSheet.create({
   wrap: {
     height: '80%',
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '50%',
-    height: '40%',
+    height: deviceHeight * 0.25,
     flexWrap: 'wrap',
   },
   container2: {

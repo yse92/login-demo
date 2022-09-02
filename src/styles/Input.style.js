@@ -16,11 +16,14 @@ export const styles = StyleSheet.create({
   input: {
     fontSize: 20,
     width: '90%',
-    marginBottom: 10,
+    height: Platform.OS === 'ios' ? 25 : 35,
+    marginBottom: Platform.OS === 'ios' ? 10 : 0,
+    paddingVertical: 0,
   },
   dateInput: {
     fontSize: 20,
     marginBottom: 10,
+    paddingVertical: 0,
   },
   container: {
     flexDirection: 'row',
@@ -30,7 +33,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: 'lightgrey',
   },
   label: {
-    marginBottom: 5,
+    marginBottom: Platform.OS === 'ios' ? 5 : 0,
     color: 'grey',
   },
   errorText: {

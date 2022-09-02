@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
     width: '10%',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    top: -30,
-    left: 30,
+    marginLeft: Platform.OS === 'ios' ? 25 : 50,
+    marginBottom: 50
   },
   images: {
     width: 90,

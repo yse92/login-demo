@@ -1,17 +1,22 @@
 import React from 'react';
-import {Image, KeyboardAvoidingView, StatusBar, StyleSheet, View} from 'react-native';
+import {Image, KeyboardAvoidingView, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {styles} from '../styles/Wrapper.styles';
 
 const Wrapper = ({children, url}) => {
   return (
     <>
-      <KeyboardAvoidingView contentContainerStyle={{height: '100%'}} behavior="position" style={styles.background}>
+      <KeyboardAvoidingView
+        contentContainerStyle={styles.contentContainer}
+        behavior={"position"}
+        keyboardVerticalOffset={0}
+        enabled={Platform.OS === "ios"}
+        style={styles.keyBoardAvoidingView}>
         <LinearGradient
           start={{x: 2, y: 1}}
           end={{x: 0, y: -0.5}}
           colors={['#1e50b3', '#c1cff3']}
-          style={{flex: 1, height: '100%', justifyContent: 'flex-end', alignItems: 'center', postion: 'relative'}}>
+          style={styles.backgroundGradient}>
           <Image source={url} style={styles.image} />
           {children}
         </LinearGradient>
@@ -25,16 +30,6 @@ const Wrapper = ({children, url}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    height: '100%'
-  },
-  image: {
-    width: 340,
-    top: 40,
-    zIndex: 2,
-  }
-});
+
 
 export default Wrapper;

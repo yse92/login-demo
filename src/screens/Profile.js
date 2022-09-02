@@ -31,7 +31,6 @@ const Profile = observer(({route}) => {
   }
   const pickImage = uri => setUri(uri)
 
-  console.log('uri: ', user.uri)
   return (
     <KeyboardAwareScrollView>
       <Wrapper>

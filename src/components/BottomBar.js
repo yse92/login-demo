@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import {styles} from '../styles/BottomBar.styles';
 
 export const BottomBar = ({text}) => {
     return (
@@ -11,14 +12,4 @@ export const BottomBar = ({text}) => {
     )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: '80%',
-    position: 'relative',
-    marginTop: -20
 
-  },
-  text: {
-    textAlign: 'right'
-  }
-})

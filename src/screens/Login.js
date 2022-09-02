@@ -28,13 +28,13 @@ const Login = observer(({navigation}) => {
   }
 
   const handleLogIn = useCallback(() => {
-    const checkEmail = isEmailValid(login)
-    const checkPassword = isPasswordValid(password)
-    if (checkEmail.length === 0 && checkPassword.length === 0) {
+    const getEmailError = isEmailValid(login)
+    const getPasswordError  = isPasswordValid(password)
+    if (getEmailError.length === 0 && getPasswordError.length === 0) {
       navigation.navigate('Profile', {logged: store.users[0]});
     } else {
-      setEmailError(checkEmail)
-      setPasswordError(checkPassword)
+      setEmailError(getEmailError)
+      setPasswordError(getPasswordError)
     }
   }, [login, password])
 

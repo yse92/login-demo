@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut, handlePress}) => {
@@ -14,11 +14,11 @@ const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut,
       case 'locked':
       case 'date':
         if (editable)
-          return <TouchableOpacity onPress={handlePress}>
+          return <TouchableOpacity style={style.buttonIcon} onPress={handlePress}>
                     <MaterialIcons name="lock-open" size={20} color="grey" />
                  </TouchableOpacity>
         else
-          return <TouchableOpacity onPress={handlePress}>
+          return <TouchableOpacity style={style.buttonIcon} onPress={handlePress}>
                     <MaterialIcons name="lock" size={20} color="grey" />
                  </TouchableOpacity>
         default:
@@ -27,5 +27,10 @@ const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut,
   })
   return <>{element()}</>
 }
-
+const style = StyleSheet.create({
+  buttonIcon: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 export default Toggle
