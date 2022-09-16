@@ -2,7 +2,16 @@ import React, {useCallback} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut, handlePress}) => {
+interface Props {
+  type: 'locked' | 'date' | 'visible',
+  editable: boolean,
+  secureTextEntry: boolean,
+  handlePressIn: ()=>{},
+  handlePressOut: ()=>{},
+  handlePress: ()=>{}
+}
+
+const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut, handlePress}: Props) => {
 
   const element = useCallback(() => {
    switch(type) {
@@ -24,7 +33,7 @@ const Toggle = ({type, editable, secureTextEntry, handlePressIn, handlePressOut,
         default:
           return null
     }
-  })
+  }, [type, editable])
   return <>{element()}</>
 }
 const style = StyleSheet.create({
@@ -33,4 +42,5 @@ const style = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
 export default Toggle

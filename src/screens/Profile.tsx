@@ -1,35 +1,46 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Wrapper from '../components/Wrapper';
 import Tab from '../components/Tab';
 import TopBar from '../components/TopBar';
 import Input from '../components/Input';
 import Header from '../components/Header';
 import {observer} from 'mobx-react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import store from '../store/store';
 import {getDescription} from '../utils/getDescription';
 import {styles} from '../styles/Profile.styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import {RootStackParamList} from "./RootStackParamList";
+import messaging from '@react-native-firebase/messaging';
 
-const Profile = observer(({route}) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
+
+const Profile = observer(({route}: Props) => {
   const {logged} = route.params;
   const [user, setUser] = useState(logged);
   const [dateOfAdmission, setDateOfAdmission] = useState(user.dateOfAdmission);
   const [dateOfBirth, setDateOfBirth] = useState(user.dateOfBirth);
   const [uri, setUri] = useState(user.uri)
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async message => {
+     console.log('A new FCM message arrived!', JSON.stringify(message));
+    });
 
+    return unsubscribe;
+  }, []);
   const onSubmit = () => {
     store.update({...user,
       dateOfAdmission: dateOfAdmission,
       dateOfBirth: dateOfBirth, uri: uri})
   }
-  const onChangeDateOfBirth = (date) => {
+  const onChangeDateOfBirth = (date: Date) => {
     setDateOfBirth(date)
   }
-  const onChangeDateOfAdmission = (date) => {
+  const onChangeDateOfAdmission = (date: Date) => {
     setDateOfAdmission(date)
   }
-  const pickImage = uri => setUri(uri)
+  const pickImage = (uri: string) => setUri(uri)
 
   return (
     <KeyboardAwareScrollView>

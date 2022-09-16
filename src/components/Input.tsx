@@ -19,7 +19,18 @@ import Toggle from './Toggle';
  * @param editable
  */
 
-const Input = props => {
+interface Props {
+  editable: boolean,
+  secureTextEntry?: boolean,
+  type?: 'locked' | 'date' | 'visible',
+  labelText: string,
+  value: any,
+  error: string,
+  onChangeDate?(date: Date): void,
+  onChange(text: string): void,
+}
+
+const Input = (props: Props) => {
   const [editable, setEditable] = useState(props.editable);
   const [secured, setSecured] = useState(props.secureTextEntry);
 
@@ -37,10 +48,9 @@ const Input = props => {
       <Text style={styles.label}>{props.labelText}</Text>
       <View style={styles.container}>
         {props.type === 'date' ?
-          <DateInput onChangeDate={props.onChangeDate}
+          <DateInput onChangeDate={props.onChangeDate!}
                      value={props.value}
-                     editable={editable}
-                     handlePress={handlePress}/> :
+                     editable={editable}/> :
           <TextInput
             onChangeText={e => props.onChange(e)}
             value={props.value}
@@ -48,12 +58,12 @@ const Input = props => {
             editable={editable}
             style={styles.input}/>}
           <Toggle
-            type={props.type}
+            type={props.type!}
             editable={editable}
-            secureTextEntry={props.secureTextEntry}
-            handlePress={handlePress}
-            handlePressIn={handlePressIn}
-            handlePressOut={handlePressOut}
+            secureTextEntry={!!props.secureTextEntry}
+            handlePress={() => setEditable(!editable)}
+            handlePressIn={() => setSecured(false)}
+            handlePressOut={() => setSecured(true)}
           />
       </View>
       {props.error && <Text style={styles.errorText}>{props.error}</Text>}

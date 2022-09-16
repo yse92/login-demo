@@ -4,16 +4,25 @@ import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
-const DateInput = ({onChangeDate, value, editable}) => {
-  const [open, setOpen] = useState(false)
-  const options = {
-    year: "numeric",
-    month: "short",
-    day: "2-digit"
-  }
-  const handleDate = (date) => {
+interface Props {
+  onChangeDate: (date: Date) => void,
+  value: Date,
+  editable: boolean
+}
+
+const options = {
+  year: "numeric",
+  month: "short",
+  day: "2-digit"
+} as const
+
+const DateInput = ({onChangeDate, value, editable}: Props) => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const handleDate = (date: Date) => {
     onChangeDate(date)
   }
+
   return (
     <>
       <Pressable onPress={() => setOpen(true)} disabled={!editable}>

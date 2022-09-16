@@ -2,7 +2,10 @@ import React from 'react'
 import {View, Text, TouchableOpacity} from 'react-native'
 import {styles} from '../styles/BottomBar.styles';
 
-export const BottomBar = ({text} : string) => {
+interface Props {
+  text: string,
+}
+export const BottomBar = ({text} : Props) => {
     return (
       <View style={styles.container}>
         <TouchableOpacity>

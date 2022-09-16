@@ -1,6 +1,6 @@
 import {isMobileValid} from './isMobileValid';
 
-export const isEmailValid = (email) => {
+export const isEmailValid = (email: string) => {
   let error = '';
   //if mobile number
   if(/[0-9]/.test(email)) {

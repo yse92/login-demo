@@ -1,9 +1,9 @@
 import {makeAutoObservable} from 'mobx';
-import {updateUser} from './updateUser';
+import {User} from './User'
 
 class Store {
 
-  users = [{
+  users: User[] = [{
       id: 1,
       mobile: '0123456789',
       email: 'example@gmail.com',
@@ -31,7 +31,7 @@ class Store {
     makeAutoObservable(this);
   }
 
-  update(currUser) {
+  update(currUser: User) {
     this.users = this.users.map(user => {
       if(currUser.id === user.id) {
         return currUser
@@ -40,7 +40,7 @@ class Store {
     });
   }
 
-  getUserById(id) {
+  getUserById(id: number | string) {
     return this.users.find(user => user.id === id)
   }
 }

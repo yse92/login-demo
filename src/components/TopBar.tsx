@@ -4,7 +4,13 @@ import {styles} from '../styles/TopBar.styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContext } from '@react-navigation/native';
 
-const TopBar = ({leftButtonText, rightButtonText, onChange}) => {
+interface Props {
+  leftButtonText: string,
+  rightButtonText: string,
+  onChange(): void
+}
+
+const TopBar = ({leftButtonText, rightButtonText, onChange}: Props) => {
   const navigation = React.useContext(NavigationContext);
   const handler = () => onChange()
 
@@ -12,7 +18,7 @@ const TopBar = ({leftButtonText, rightButtonText, onChange}) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.leftButton}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation?.goBack()}>
         <MaterialIcons name="chevron-left" size={30} color="#fff" />
         <Text style={styles.leftButtonText}>{leftButtonText}</Text>
       </TouchableOpacity>

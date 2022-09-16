@@ -1,4 +1,4 @@
-export const isPasswordValid = (password) => {
+export const isPasswordValid = (password: string) => {
   let error = '';
   if (password.length === 0) {
     error = 'Password is required';

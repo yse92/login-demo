@@ -1,9 +1,14 @@
 import React from 'react';
-import {Image, KeyboardAvoidingView, StatusBar} from 'react-native';
+import {Image, KeyboardAvoidingView, Platform, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {styles} from '../styles/Wrapper.styles';
 
-const Wrapper = ({children, url}) => {
+interface Props {
+  url: string | undefined,
+  children: React.ReactNode
+}
+
+const Wrapper = ({children, url}: Props) => {
   return (
     <>
       <KeyboardAvoidingView

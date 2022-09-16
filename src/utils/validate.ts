@@ -1,8 +1,8 @@
 import {isEmailValid} from './isEmailValid';
 
-export const validate = (login, password) => {
+export const validate = (login: string) => {
   let error = '';
-  error = isEmailValid(email)
+  error = isEmailValid(login)
 
   return error;
 };

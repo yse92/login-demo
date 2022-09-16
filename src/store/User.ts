@@ -1,0 +1,20 @@
+export interface User {
+  id: number,
+  mobile: string,
+  email: string,
+  password: string,
+  firstName: string,
+  secondName: string,
+  adharNo: string,
+  academicYear: string,
+  admissionClass: string,
+  oldAdmissionNo: string,
+  dateOfAdmission: Date,
+  dateOfBirth: Date,
+  parentMailID: string,
+  motherName: string,
+  fatherName: string,
+  parmanentAdd: string,
+  uri: string,
+  extraInfo: Object
+}

@@ -5,7 +5,14 @@ import {styles} from '../styles/Header.style'
 import {findUri} from '../utils/findUri';
 const ImagePicker = require('react-native-image-picker');
 
-const Header = ({title, descriptionText, onPress, uri}) => {
+interface Props {
+  title: string,
+  descriptionText: string,
+  onPress(uri: string): void,
+  uri: string
+}
+
+const Header = ({title, descriptionText, onPress, uri}: Props) => {
 
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary(
